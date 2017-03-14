@@ -42,12 +42,36 @@ public int recursiveLinearSearch(int catNumToFind, int startIndex) {
 }
 
 public int binarySearch(int catNumToFind) {
-  //complete this method    
+  int low = 0;
+  int high = store.length - 1;
+  while (low <= high) {
+    int guess = (low + high) / 2;
+    if (store[guess].getCatNum() == catNumToFind) {
+      return store[guess].getInventory();
+    }
+    if (store[guess].getCatNum() < catNumToFind) {
+      low = guess + 1;
+    }
+    if (store[guess].getCatNum() > catNumToFind) {
+      high = guess - 1;
+    }
+  }
   return -1;
 }
 
 public int recursiveBinarySearch(int catNumToFind, int nLow, int nHigh) {
-  //complete this method    
+  if (nLow <= nHigh) {
+    int guess = (nLow + nHigh) / 2;
+    if (store[guess].getCatNum() == catNumToFind) {
+      return store[guess].getInventory();
+    }
+    if (store[guess].getCatNum() < catNumToFind) {
+      return recursiveBinarySearch(catNumToFind, guess + 1, nHigh);
+    }
+    if (store[guess].getCatNum() > catNumToFind) {
+      return recursiveBinarySearch(catNumToFind, nLow, nHigh - 1);
+    }
+  }
   return -1;
 }
 
